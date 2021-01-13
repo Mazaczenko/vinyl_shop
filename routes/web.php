@@ -19,20 +19,20 @@ Route::view('contact-us', 'contact');
 
 Route::view('vinylHome', 'vinylHome');
 
-Route::get('admin/records', function (){
-    
-    $records = [
-        'Queen - Greatest Hits',
-        'The Rolling Stones - Sticky Fingers',
-        'The Beatles - Abbey Road'
-    ];
-
-    return view('admin.records.index', [
-        'records' => $records
-    ]);
-
-    return view('admin.records.index');
+// New version with prefix and group
+Route::prefix('vadmin')->group(function () {
+    Route::get('records', function (){
+        $records = [
+            'Queen - Greatest Hits',
+            'The Rolling Stones - Sticky Fingers',
+            'The Beatles - Abbey Road'
+        ];
+        return view('admin.records.index', [
+            'records' => $records
+        ]);
+    });
 });
+
 
 Auth::routes();
 
