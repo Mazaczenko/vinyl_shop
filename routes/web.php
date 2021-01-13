@@ -21,19 +21,11 @@ Route::view('vinylHome', 'vinylHome');
 
 // New version with prefix and group
 Route::prefix('admin')->group(function () {
-    Route::redirect('/', '/admin/records');
-    Route::get('records', function (){
-        $records = [
-            'Queen - Greatest Hits',
-            'The Rolling Stones - Sticky Fingers',
-            'The Beatles - Abbey Road'
-        ];
-        return view('admin.records.index', [
-            'records' => $records
-        ]);
-    });
+    Route::redirect('/', 'records');
+    Route::get('records', [\App\Http\Controllers\Admin\RecordController::class, 'index'])->name('index');
 });
 
+// Routs for authorized users
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
