@@ -4,7 +4,7 @@
     <?php
         foreach ($records as $record){
             echo "<li> $record </li>";
-            //echo '<li>' . $record . '</li>';
+    
         }
     ?>
 </ul>
