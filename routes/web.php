@@ -20,7 +20,8 @@ Route::view('contact-us', 'contact');
 Route::view('vinylHome', 'vinylHome');
 
 // New version with prefix and group
-Route::prefix('vadmin')->group(function () {
+Route::prefix('admin')->group(function () {
+    Route::redirect('/', '/admin/records');
     Route::get('records', function (){
         $records = [
             'Queen - Greatest Hits',
@@ -32,7 +33,6 @@ Route::prefix('vadmin')->group(function () {
         ]);
     });
 });
-
 
 Auth::routes();
 
