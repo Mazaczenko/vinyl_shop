@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
+
+        // App/Order.php
+    public function user() 
+    {
+        return $this->belongsTo('App\User')->withDefault();   // an order belongs to a user
+    }
 }
