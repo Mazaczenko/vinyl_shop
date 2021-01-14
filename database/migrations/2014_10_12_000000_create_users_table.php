@@ -24,6 +24,41 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+    // Insert some users (inside the up-function!)
+    DB::table('users')->insert(
+        [
+            [
+                'name' => 'user',
+                'email' => 'user@user.com',
+                'admin' => false,
+                'password' => Hash::make('userpassword'),
+                'created_at' => now(),
+                'email_verified_at' => now()
+            ],
+            [
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'admin' => false,
+                'password' => Hash::make('adminpassword'),
+                'created_at' => now(),
+                'email_verified_at' => now()
+            ]
+        ]
+    );
+    
+    // Add 40 dummy users inside a loop
+    for ($i = 0; $i <= 40; $i++) {
+        DB::table('users')->insert(
+            [
+                'name' => "ITF User $i",
+                'email' => "itf_user_$i@mailinator.com",
+                'password' => Hash::make("itfuser$i"),
+                'created_at' => now(),
+                'email_verified_at' => now()
+            ]
+        );
+    }
     }
 
     /**
