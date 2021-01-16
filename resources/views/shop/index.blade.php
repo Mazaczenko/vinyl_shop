@@ -10,13 +10,15 @@
     <div class="row">
         <div class="col-sm-6 mb-2">
             <input type="text" class="form-control" name="artist" id="artist"
-                   value="" placeholder="Filter Artist Or Record">
+                value="{{ request()->artist }}"
+                placeholder="Filter Artist Or Record">
         </div>
         <div class="col-sm-4 mb-2">
             <select class="form-control" name="genre_id" id="genre_id">
             <option value="%">All genres</option>
                 @foreach($genres as $genre)
-                <option value="{{ $genre->id }}">{{ $genre->name }}</option>
+                <option value="{{ $genre->id }}">
+                    {{ (request()->genre_id ==  $genre->id ? 'selected' : '') }}>{{ $genre->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -25,7 +27,16 @@
         </div>
     </div>
 </form>
-<hr>                                                    
+<hr>
+@if ($records->count() == 0)
+    <div class="alert alert-danger alert-dismissible fade show">
+        Can't find any artist or album with <b>'{{ request()->artist }}'</b> for this genre
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+    </div>
+@endif
+
 <!-- END SEARCH FORM -->
 <!-- PAGINATION -->
 {{ $records->links() }}                                 

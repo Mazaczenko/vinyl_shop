@@ -10,9 +10,21 @@ use Illuminate\Http\Request;
 class ShopController extends Controller
 {
     // Master page
-    public function index()
+    public function index(Request $request)
     {
-        $records = Record::with('genre')->paginate(12);               // get all records
+        $genre_id = $request->input('genre_id') ?? '%';                     // OR $genre_id = $request->genre_id ?? '%';
+        $artist_title = '%' . $request->input('artist') . '%';              // OR $artist_title = '%' . $request->artist . '%';
+        $records = Record::with('genre')
+            ->where(function ($query) use ($artist_title, $genre_id) {
+                $query->where('artist', 'like', $artist_title)
+                    ->where('genre_id', 'like', $genre_id);
+            })
+            ->orWhere(function ($query) use ($artist_title, $genre_id) {
+                $query->where('title', 'like', $artist_title)
+                    ->where('genre_id', 'like', $genre_id);
+            })
+            ->paginate(12)                                                  // get all records
+            ->appends(['artist'=> $request->input('artist'), 'genre_id' => $request->input('genre_id')]);
         foreach ($records as $record) {
             if(!$record->cover) {
                 $record->cover = 'https://coverartarchive.org/release/' . $record->title_mbid . '/front-250.jpg';
