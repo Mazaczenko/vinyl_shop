@@ -11,7 +11,7 @@ class ShopController extends Controller
     // Master page
     public function index()
     {
-        $records = Record::with('genre')->get();               // get all records
+        $records = Record::with('genre')->paginate(12);               // get all records
         foreach ($records as $record) {
             if(!$record->cover) {
                 $record->cover = 'https://coverartarchive.org/release/' . $record->title_mbid . '/front-250.jpg';
