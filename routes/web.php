@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Admin\RecordController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,16 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Basic views
 Route::view('/', 'vinylHome');
-
 Route::view('contact-us', 'contact');
-
 Route::view('vinylHome', 'vinylHome');
 
 // New version with prefix and group
 Route::prefix('admin')->group(function () {
+
     Route::redirect('/', 'records');
-    Route::get('records', [\App\Http\Controllers\Admin\RecordController::class, 'index'])->name('index');
+    Route::get('records',[RecordController::class, 'index']);
 });
 
 // Routs for authorized users

@@ -13,18 +13,14 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('orderlines', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id');
-            $table->string('artist');
-            $table->string('title');
-            $table->string('cover')->nullable();
+            $table->foreignId('user_id');
             $table->float('total_price', 6, 2);
-            $table->unsignedInteger('quantity');
             $table->timestamps();
     
             // Foreign key relation
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
