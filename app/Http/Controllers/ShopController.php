@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Json;
+use App\Models\Genre;
 use App\Models\Record;
 use Illuminate\Http\Request;
 
@@ -17,9 +18,17 @@ class ShopController extends Controller
                 $record->cover = 'https://coverartarchive.org/release/' . $record->title_mbid . '/front-250.jpg';
             }
         }
-        $result = compact('records');           // compact('records') is the same as ['records' => $records]
-        Json::dump($result);                    // open http://vinyl_shop.test/shop?json
-        return view('shop.index', $result);     // add $result as second parameter
+
+        $genres = Genre::orderBy('name')
+            ->has('records')                        // only genres that have one or more records
+            ->withCount('records')                  // add a new property 'records_count' to the Genre models/objects
+            ->get();
+
+
+        $result = compact('genres', 'records');     // $result = ['genres' => $genres, 'records' => $records]
+        
+        Json::dump($result);                        // open http://vinyl_shop.test/shop?json
+        return view('shop.index', $result);         // add $result as second parameter
     }
 
     // Detail page

@@ -5,9 +5,30 @@
 @section('main')
 
 <h1>Shop</h1>
-
-
-{{ $records->links() }}     <!-- PAGINATION -->
+<!-- SEARCH FORM -->
+<form method="get" action="/shop" id="searchForm">      
+    <div class="row">
+        <div class="col-sm-6 mb-2">
+            <input type="text" class="form-control" name="artist" id="artist"
+                   value="" placeholder="Filter Artist Or Record">
+        </div>
+        <div class="col-sm-4 mb-2">
+            <select class="form-control" name="genre_id" id="genre_id">
+            <option value="%">All genres</option>
+                @foreach($genres as $genre)
+                    <option value="{{ $genre->id }}">{{ ucfirst($genre->name) }} ({{ $genre->records_count }})</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-sm-2 mb-2">
+            <button type="submit" class="btn btn-success btn-block">Search</button>
+        </div>
+    </div>
+</form>
+<hr>                                                    
+<!-- END SEARCH FORM -->
+<!-- PAGINATION -->
+{{ $records->links() }}                                 
 <div class="row">
     @foreach($records as $record)
         <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
@@ -28,6 +49,6 @@
         </div>
     @endforeach
 </div>
-{{ $records->links() }}     <!-- END PAGINATION -->
-
+{{ $records->links() }}                                 
+<!-- END PAGINATION -->
 @endsection
