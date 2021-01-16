@@ -10,10 +10,13 @@
                     <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/shop">Shop</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/contact-us">Contact</a>
                 </li>
             </ul>
-            {{--  Admin navigation  --}}
+            {{-- Admin navigation  --}}
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#!" data-toggle="dropdown">Admin</a>

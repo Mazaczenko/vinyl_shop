@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RecordController;
+use App\Http\Controllers\ShopController;
+use Doctrine\DBAL\Schema\Index;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +18,8 @@ use App\Http\Controllers\Admin\RecordController;
 
 // Basic views
 Route::view('/', 'vinylHome');
+Route::get('shop', [ShopController::class, 'index']);
+Route::get('shop/{id}', [ShopController::class, 'show']);
 Route::view('contact-us', 'contact');
 Route::view('vinylHome', 'vinylHome');
 
