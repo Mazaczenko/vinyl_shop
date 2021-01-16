@@ -11,7 +11,7 @@ class Json
      * @param bool $onlyInDebugMode runs only in debug mode: default = true
      * @version 1.0
      */
-    public function dump($data = null, $onlyInDebugMode = true)
+    public static function dump($data = null, $onlyInDebugMode = true)
     {
         $show = ($onlyInDebugMode === true && env('APP_DEBUG') === false) ? false : true;
         if (array_key_exists('json', app('request')->query()) && $show) {
