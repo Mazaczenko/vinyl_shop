@@ -11528,6 +11528,47 @@
                         /** @var \Illuminate\Routing\Router $instance */
                         return $instance->macroCall($method, $parameters);
         }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::auth()
+         * @param mixed $options
+         * @static 
+         */ 
+        public static function auth($options = [])
+        {
+                        return \Illuminate\Routing\Router::auth($options);
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::resetPassword()
+         * @static 
+         */ 
+        public static function resetPassword()
+        {
+                        return \Illuminate\Routing\Router::resetPassword();
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::confirmPassword()
+         * @static 
+         */ 
+        public static function confirmPassword()
+        {
+                        return \Illuminate\Routing\Router::confirmPassword();
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::emailVerification()
+         * @static 
+         */ 
+        public static function emailVerification()
+        {
+                        return \Illuminate\Routing\Router::emailVerification();
+        }
          
     }
             /**
@@ -14549,7 +14590,53 @@
      
 }
 
-        namespace Facade\Ignition\Facades { 
+        namespace Facades\App\Helpers { 
+            /**
+     * 
+     *
+     * @see \App\Helpers\Json
+     */ 
+        class Json {
+                    /**
+         * Dump data as json (add ?json to URL)
+         *
+         * @param mixed $data string, array, associative array object
+         * @param bool $onlyInDebugMode runs only in debug mode: default = true
+         * @version 1.0
+         * @static 
+         */ 
+        public static function dump($data = null, $onlyInDebugMode = true)
+        {
+                        /** @var \App\Helpers\Json $instance */
+                        return $instance->dump($data, $onlyInDebugMode);
+        }
+         
+    }
+            /**
+     * 
+     *
+     * @see \App\Helpers\Mask
+     */ 
+        class Mask {
+                    /**
+         * Obfuscate mail address
+         *
+         * @param string $email
+         * @param string $name
+         * @return \App\Helpers\HtmlString 
+         * @static 
+         */ 
+        public static function email($email, $name = null)
+        {
+                        /** @var \App\Helpers\Mask $instance */
+                        return $instance->email($email, $name);
+        }
+         
+    }
+     
+}
+
+    namespace Facade\Ignition\Facades { 
             /**
      * Class Flare.
      *
@@ -14841,6 +14928,59 @@
         public static function hasValidRelativeSignature()
         {
                         return \Illuminate\Http\Request::hasValidRelativeSignature();
+        }
+         
+    }
+     
+}
+
+    namespace Illuminate\Routing { 
+            /**
+     * 
+     *
+     * @mixin \Illuminate\Routing\RouteRegistrar
+     */ 
+        class Router {
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::auth()
+         * @param mixed $options
+         * @static 
+         */ 
+        public static function auth($options = [])
+        {
+                        return \Illuminate\Routing\Router::auth($options);
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::resetPassword()
+         * @static 
+         */ 
+        public static function resetPassword()
+        {
+                        return \Illuminate\Routing\Router::resetPassword();
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::confirmPassword()
+         * @static 
+         */ 
+        public static function confirmPassword()
+        {
+                        return \Illuminate\Routing\Router::confirmPassword();
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::emailVerification()
+         * @static 
+         */ 
+        public static function emailVerification()
+        {
+                        return \Illuminate\Routing\Router::emailVerification();
         }
          
     }
@@ -17941,9 +18081,11 @@ namespace  {
             class Gate extends \Illuminate\Support\Facades\Gate {}
             class Hash extends \Illuminate\Support\Facades\Hash {}
             class Http extends \Illuminate\Support\Facades\Http {}
+            class Json extends \Facades\App\Helpers\Json {}
             class Lang extends \Illuminate\Support\Facades\Lang {}
             class Log extends \Illuminate\Support\Facades\Log {}
             class Mail extends \Illuminate\Support\Facades\Mail {}
+            class Mask extends \Facades\App\Helpers\Mask {}
             class Notification extends \Illuminate\Support\Facades\Notification {}
             class Password extends \Illuminate\Support\Facades\Password {}
             class Queue extends \Illuminate\Support\Facades\Queue {}
