@@ -12,6 +12,6 @@ class Order extends Model
         // App/Order.php
     public function user() 
     {
-        return $this->belongsTo('App\User')->withDefault();   // an order belongs to a user
+        return $this->belongsTo(User::class)->withDefault();   // an order belongs to a user
     }
 }

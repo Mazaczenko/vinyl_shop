@@ -11,6 +11,6 @@ class Record extends Model
 
     public function genre() 
     {
-        return $this->belongsTo('App\Genre')->withDefault();   // a record belongs to a genre
+        return $this->belongsTo(Genre::class)->withDefault();   // a record belongs to a genre
     }
 }

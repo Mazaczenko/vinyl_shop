@@ -44,6 +44,6 @@ class User extends Authenticatable
         // App/User.php
     public function orders() 
     {
-        return $this->hasMany('App\Order');   // a user has many orders
+        return $this->hasMany(Order::class);   // a user has many orders
     }
 }

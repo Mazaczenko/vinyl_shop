@@ -12,6 +12,6 @@ class Orderline extends Model
         // App/Orderline.php
     public function order() 
     {
-        return $this->belongsTo('App\Order')->withDefault();   // an orderline belongs to an order
+        return $this->belongsTo(Order::class)->withDefault();   // an orderline belongs to an order
     }
 }
