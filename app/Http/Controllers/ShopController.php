@@ -22,8 +22,14 @@ class ShopController extends Controller
         $genres = Genre::orderBy('name')
             ->has('records')                        // only genres that have one or more records
             ->withCount('records')                  // add a new property 'records_count' to the Genre models/objects
-            ->get();
-
+            ->get()
+            ->transform(function ($item, $key) {
+                // Set first letter of name to uppercase and add the counter
+                $item->name = ucfirst($item->name) . ' (' . $item->records_count . ')';
+                // Remove all fields that you don't use inside the view
+                unset($item->created_at, $item->updated_at, $item->records_count);
+                return $item;
+            });
 
         $result = compact('genres', 'records');     // $result = ['genres' => $genres, 'records' => $records]
         

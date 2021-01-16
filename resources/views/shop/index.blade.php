@@ -16,7 +16,7 @@
             <select class="form-control" name="genre_id" id="genre_id">
             <option value="%">All genres</option>
                 @foreach($genres as $genre)
-                    <option value="{{ $genre->id }}">{{ ucfirst($genre->name) }} ({{ $genre->records_count }})</option>
+                <option value="{{ $genre->id }}">{{ $genre->name }}</option>
                 @endforeach
             </select>
         </div>
