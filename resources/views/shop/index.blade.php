@@ -2,13 +2,14 @@
 
 @section('title', 'Shop')
 
+
 @section('main')
 
 <h1>Shop</h1>
 <!-- SEARCH FORM -->
-<form method="get" action="/shop" id="searchForm">      
+<form method="get" action="/shop" id="searchForm">
     <div class="row">
-        <div class="col-sm-6 mb-2">
+        <div class="d-flex col-sm-6 mb-2">
             <input type="text" class="form-control" name="artist" id="artist"
                 value="{{ request()->artist }}"
                 placeholder="Filter Artist Or Record">
@@ -39,12 +40,12 @@
 
 <!-- END SEARCH FORM -->
 <!-- PAGINATION -->
-{{ $records->links() }}                                 
+{{ $records->links() }}
 <div class="row">
     @foreach($records as $record)
         <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
-            <div class="card">
-            <img class="card-img-top" src="{{ $record->cover }}" alt="{{ $record->artist }} - {{ $record->title }}">        
+            <div class="card" data-id="{{ $record->id }}">
+            <img class="card-img-top" src="/assets/vinyl.png" data-src="{{ $record->cover }}" alt="{{ $record->artist }} - {{ $record->title }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ $record->artist }}</h5>
                     <p class="card-text">{{ $record->title }}</p>
@@ -54,12 +55,42 @@
                     <p>{{ $record->genre->name }}</p>
                     <p>€ {{ number_format($record->price,2) }}
                         <span class="ml-3 badge badge-success">{{ $record->stock }}</span>
-                    </p>    
+                    </p>
                 </div>
             </div>
         </div>
     @endforeach
 </div>
-{{ $records->links() }}                                 
+{{ $records->links() }}
 <!-- END PAGINATION -->
+@endsection
+
+@section('script_after')
+    <script>
+        $(function () {
+            // Get record id and redirect to the detail page
+            $('.card').click(function () {
+                record_id = $(this).data('id');
+                $(location).attr('href', `/shop/${record_id}`); //OR $(location).attr('href', '/shop/' + record_id);
+            });
+            // Replace vinyl.png with real cover
+            $('.card img').each(function () {
+                $(this).attr('src', $(this).data('src'));
+            });
+            // Add shadow to card on hover
+            $('.card').hover(function () {
+                $(this).addClass('shadow');
+            }, function () {
+                $(this).removeClass('shadow');
+            });
+            // submit form when leaving text field 'artist'
+            $('#artist').blur(function () {
+                $('#searchForm').submit();
+            });
+            // submit form when changing dropdown list 'genre_id'
+            $('#genre_id').change(function () {
+                $('#searchForm').submit();
+            });
+        })
+    </script>
 @endsection

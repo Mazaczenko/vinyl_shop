@@ -23,7 +23,7 @@ class ShopController extends Controller
                 $query->where('title', 'like', $artist_title)
                     ->where('genre_id', 'like', $genre_id);
             })
-            ->paginate(12)                                                  // get all records
+            ->paginate(12)                         // get all records
             ->appends(['artist'=> $request->input('artist'), 'genre_id' => $request->input('genre_id')]);
         foreach ($records as $record) {
             if(!$record->cover) {
@@ -44,14 +44,14 @@ class ShopController extends Controller
             });
 
         $result = compact('genres', 'records');     // $result = ['genres' => $genres, 'records' => $records]
-        
+
         Json::dump($result);                        // open http://vinyl_shop.test/shop?json
         return view('shop.index', $result);         // add $result as second parameter
     }
 
     // Detail page
     public function show($id) {
-        
+
         return view('shop.show', ['id' => $id]);
     }
 }
