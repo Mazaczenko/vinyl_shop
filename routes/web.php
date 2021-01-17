@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RecordController;
+use App\Http\Controllers\ItunesControlle;
 use App\Http\Controllers\ShopController;
 use Doctrine\DBAL\Schema\Index;
 
@@ -18,6 +19,7 @@ use Doctrine\DBAL\Schema\Index;
 
 // Basic views
 Route::view('/', 'vinylHome');
+Route::get('itunes', [ItunesControlle::class, 'index']);
 Route::get('shop', [ShopController::class, 'index']);
 Route::get('shop/{id}', [ShopController::class, 'show']);
 Route::view('contact-us', 'contact');
