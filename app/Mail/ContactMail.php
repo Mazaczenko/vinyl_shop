@@ -11,14 +11,12 @@ class ContactMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public $request;
+
+    /** Create a new message instance. */
+    public function __construct($request)
     {
-        //
+        $this->request = $request;
     }
 
     /**
@@ -28,6 +26,9 @@ class ContactMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('email.contact');
+        return $this->from('info@vinylshop.com', 'The Vinyl Shop - News')
+            ->cc('info@vinylshop.com', 'The Vinyl Shop - News')
+            ->subject('The Vinyl Shop - Contact Form')
+            ->markdown('email.contact');
     }
 }

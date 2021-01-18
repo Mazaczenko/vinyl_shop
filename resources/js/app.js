@@ -4,5 +4,11 @@ require('./bootstrap');
 import VinylShop from "./vinylShop";
 window.VinylShop = VinylShop;
 
-// Run the hello() function
-VinylShop.hello();
+// Form fields which are REQUIRED will be shown with red star
+$(function(){
+    $('[required]').each(function () {
+        $(this).closest('.form-group')
+               .find('label')
+               .append('<sup class="text-danger mx-1">*</sup>');
+    });
+});

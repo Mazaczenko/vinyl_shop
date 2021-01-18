@@ -25,8 +25,8 @@ class ContactUsController extends Controller
         ]);
 
         // Send email
-        $email = new ContactMail();
-        // return $email;       // uncomment this line to display the result in the browser
+        $email = new ContactMail($request);
+
         Mail::to($request)      // or Mail::to($request->email, $request->name)
             ->send($email);
 
