@@ -15,6 +15,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/contact-us">Contact</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/itunes">iTunes</a>
+                </li>
             </ul>
             {{-- Admin navigation  --}}
             <ul class="navbar-nav ml-auto">
