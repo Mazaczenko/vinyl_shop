@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Mail;
 
 class ContactUsController extends Controller
 {
@@ -16,8 +18,17 @@ class ContactUsController extends Controller
     public function sendEmail(Request $request)
     {
         // Validate form
+        $this->validate($request,[
+            'name' => 'required',
+            'email' => 'required|email',
+            'message' => 'required|min:10'
+        ]);
 
         // Send email
+        $email = new ContactMail();
+        // return $email;       // uncomment this line to display the result in the browser
+        Mail::to($request)      // or Mail::to($request->email, $request->name)
+            ->send($email);
 
         // Flash filled-in form values to the session
         $request->flash();
