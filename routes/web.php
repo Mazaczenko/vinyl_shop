@@ -19,8 +19,6 @@ use App\Http\Controllers\ShopController;
 */
 
 // Basic views
-Route::view('/', 'vinylHome');
-
 Route::view('vinylHome', 'vinylHome');
 
 Route::get('contact-us', [ContactUsController::class, 'show']);
@@ -42,5 +40,6 @@ Route::prefix('admin')->group(function () {
 
 // Routs for authorized users
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::redirect('home', '/');
+Route::view('/', 'home');
