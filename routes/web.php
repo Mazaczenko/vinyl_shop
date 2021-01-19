@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RecordController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ItunesControlle;
 use App\Http\Controllers\ShopController;
@@ -24,14 +25,16 @@ Route::post('contact-us', [ContactUsController::class, 'sendEmail']);
 Route::get('itunes', [ItunesControlle::class, 'index']);
 Route::get('shop', [ShopController::class, 'index']);
 Route::get('shop/{id}', [ShopController::class, 'show']);
+
 // New version with prefix and group
-Route::prefix('admin')->group(function ()
+Route::middleware(['auth'])->prefix('admin')->group(function ()
 {
     Route::redirect('/', 'records');
     Route::get('records',[RecordController::class, 'index']);
 });
+
 // Routs for authorized users
 Auth::routes();
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('logout', [LoginController::class, 'logout']);
 Route::redirect('home', '/');
 Route::view('/', 'home');
