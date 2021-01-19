@@ -1,4 +1,5 @@
 @component('mail::message')
+
 # Dear {{ $request->name }},
 Thanks for you message.<br>
 We'll contact you as soon as possible.

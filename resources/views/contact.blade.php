@@ -27,6 +27,16 @@
                value="{{ old('email') }}">
         <div class="invalid-feedback">{{ $errors->first('email') }}</div>
     </div>
+
+        <div class="form-group">
+            <label for="contact">Contact</label>
+            <select class="custom-select" name="contact" id="contact" required>
+                <option selected>Select a contact</option>
+                <option value="info">Info</option>
+                <option value="billing">Billing</option>
+                <option value="support">Support</option>
+            </select>
+        </div>
     <div class="form-group">
         <label for="message">Message</label>
         <textarea name="message" id="message" rows="5"
@@ -41,3 +51,9 @@
 @endif
 
 @endsection
+
+@if(env('APP_DEBUG'))
+    <script>
+        $('form').attr('novalidate', 'true');
+    </script>
+@endif

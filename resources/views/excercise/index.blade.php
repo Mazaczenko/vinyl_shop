@@ -18,7 +18,7 @@
                     <table class="table">
                         <tbody>
                             <th>{{ $song['genres'][0]['name'] }}</th>
-                            <th><a href="{{ $song['artistUrl'] }}">{{ $song['artistName'] }}</a></th>
+                            <th><a href="{{ $song['artistUrl'] }}">see more</a></th>
                         </tbody>
                     </table>
                 </div>
