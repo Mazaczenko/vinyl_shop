@@ -27,7 +27,7 @@ Route::get('shop', [ShopController::class, 'index']);
 Route::get('shop/{id}', [ShopController::class, 'show']);
 
 // New version with prefix and group
-Route::middleware(['auth'])->prefix('admin')->group(function ()
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function ()
 {
     Route::redirect('/', 'records');
     Route::get('records',[RecordController::class, 'index']);
