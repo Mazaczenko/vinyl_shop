@@ -19,27 +19,19 @@ use App\Http\Controllers\ShopController;
 */
 
 // Basic views
-Route::view('vinylHome', 'vinylHome');
-
 Route::get('contact-us', [ContactUsController::class, 'show']);
-
 Route::post('contact-us', [ContactUsController::class, 'sendEmail']);
-
 Route::get('itunes', [ItunesControlle::class, 'index']);
-
 Route::get('shop', [ShopController::class, 'index']);
-
 Route::get('shop/{id}', [ShopController::class, 'show']);
-
 // New version with prefix and group
-Route::prefix('admin')->group(function () {
-
+Route::prefix('admin')->group(function ()
+{
     Route::redirect('/', 'records');
     Route::get('records',[RecordController::class, 'index']);
 });
-
 // Routs for authorized users
 Auth::routes();
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 Route::redirect('home', '/');
 Route::view('/', 'home');
