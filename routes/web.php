@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ItunesControlle;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\User\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function ()
 
 // Routs for authorized users
 Auth::routes();
-Route::get('logout', [LoginController::class, 'logout']);
-Route::redirect('home', '/');
-Route::view('/', 'home');
+    Route::get('logout', [LoginController::class, 'logout']);
+    Route::redirect('home', '/');
+    Route::view('/', 'home');
+
+Route::middleware(['auth'])->prefix('user')->group(function () {
+    Route::redirect('/', '/user/profile');
+    Route::get('profile', [ProfileController::class, 'edit']);
+    Route::post('profile', [ProfileController::class, 'update']);
+});
