@@ -1,12 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\RecordController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\ContactUsController;
-use App\Http\Controllers\ItunesControlle;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ItunesControlle;
+use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\RecordController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\PasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,4 +44,6 @@ Route::middleware(['auth'])->prefix('user')->group(function () {
     Route::redirect('/', '/user/profile');
     Route::get('profile', [ProfileController::class, 'edit']);
     Route::post('profile', [ProfileController::class, 'update']);
+    Route::get('password', [PasswordController::class, 'edit']);
+    Route::post('password', [PasswordController::class, 'update']);
 });
