@@ -7,7 +7,6 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ItunesControlle;
 use App\Http\Controllers\ShopController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
