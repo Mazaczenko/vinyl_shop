@@ -67,8 +67,8 @@
 
     // Delete a genre
     function deleteGenre(id) {
-        // Delete the genre from the database
-        let pars = {
+    // Delete the genre from the database
+    let pars = {
         '_token': '{{ csrf_token() }}',
         '_method': 'delete'
     };
@@ -86,7 +86,7 @@
         .fail(function (e) {
             console.log('error', e);
         });
-    }
+}
 
         // Load genres with AJAX
         function loadTable() {
