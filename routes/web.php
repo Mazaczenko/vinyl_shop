@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\Admin\GenresController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ItunesControlle;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\GenresController;
 use App\Http\Controllers\Admin\RecordController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\Admin\Genres2Controller;
 use App\Http\Controllers\User\PasswordController;
 
 /*
@@ -34,6 +35,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function ()
     Route::redirect('/', '/admin/records');
     Route::get('records',[RecordController::class, 'index']);
     Route::resource('genres', GenresController::class);
+    Route::resource('genres2', Genres2Controller::class)->parameters([
+        'genres2' => 'genres'
+    ]);
+
 });
 
 // Routs for authorized users

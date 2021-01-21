@@ -37,6 +37,7 @@
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <button type="button" class="btn btn-outline-danger deleteGenre"
+                                id="{{ $genre->name }}"
                                 data-toggle="tooltip"
                                 data-records="{{ $genre->records_count }}"
                                 title="Delete {{ $genre->name }}">
@@ -56,10 +57,9 @@
         $(function () {
             $('.deleteGenre').click(function () {
                 let records = $(this).data('records');
-                let name = $(this).data('name');
                 let msg = `Delete this genre?`;
                 if (records > 0) {
-                    msg += `\nThe ${records} records of this ${name} will also be deleted!`
+                    msg += `\nThe ${records} records of genre will also be deleted!`
                 }
                 if(confirm(msg)) {
                     $(this).closest('form').submit();
