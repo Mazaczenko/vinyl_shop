@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\GenresController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ItunesControlle;
@@ -30,8 +31,9 @@ Route::get('shop/{id}', [ShopController::class, 'show']);
 // New version with prefix and group
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function ()
 {
-    Route::redirect('/', 'records');
+    Route::redirect('/', '/admin/records');
     Route::get('records',[RecordController::class, 'index']);
+    Route::resource('genres', GenresController::class);
 });
 
 // Routs for authorized users
