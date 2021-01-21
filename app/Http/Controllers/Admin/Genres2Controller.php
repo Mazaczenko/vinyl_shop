@@ -15,7 +15,7 @@ class Genres2Controller extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.genres2.index');
     }
 
     /**
@@ -81,6 +81,19 @@ class Genres2Controller extends Controller
      */
     public function destroy(Genre $genre)
     {
-        //
+        $genre->delete();
+        return response()->json([
+            'type' => 'success',
+            'text' => "The genre <b>$genre->name</b> has been deleted"
+        ]);
+
+    }
+
+    public function qryGenres()
+    {
+        $genres = Genre::orderBy('name')
+            ->withCount('records')
+            ->get();
+        return $genres;
     }
 }

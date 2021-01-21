@@ -33,12 +33,12 @@ Route::get('shop/{id}', [ShopController::class, 'show']);
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function ()
 {
     Route::redirect('/', '/admin/records');
-    Route::get('records',[RecordController::class, 'index']);
     Route::resource('genres', GenresController::class);
+    Route::get('genres2/qryGenres', [Genres2Controller::class, 'qryGenres']);
     Route::resource('genres2', Genres2Controller::class)->parameters([
         'genres2' => 'genres'
     ]);
-
+    Route::get('records',[RecordController::class, 'index']);
 });
 
 // Routs for authorized users
