@@ -23,6 +23,7 @@
             </tbody>
         </table>
     </div>
+    @include('admin.genres2.modal')
 @endsection
 
 @section('script_after')
@@ -63,9 +64,71 @@
                 ]
             }).show();
         });
+
+        $('tbody').on('click', '.btn-edit', function () {
+            // Get data attributes from td tag
+            let id = $(this).closest('td').data('id');
+            let name = $(this).closest('td').data('name');
+            // Update the modal
+            $('.modal-title').text(`Edit ${name}`);
+            $('form').attr('action', `/admin/genres2/${id}`);
+            $('#name').val(name);
+            $('input[name="_method"]').val('put');
+            // Show the modal
+            $('#modal-genre').modal('show');
+        });
+
+        $('#btn-create').click(function () {
+        // Update the modal
+        $('.modal-title').text(`New genre`);
+        $('form').attr('action', `/admin/genres2`);
+        $('#name').val('');
+        $('input[name="_method"]').val('post');
+        // Show the modal
+        $('#modal-genre').modal('show');
+        });
+
+        $('#modal-genre form').submit(function (e) {
+        // Don't submit the form
+        e.preventDefault();
+        // Get the action property (the URL to submit)
+        let action = $(this).attr('action');
+        // Serialize the form and send it as a parameter with the post
+        let pars = $(this).serialize();
+        console.log(pars);
+        // Post the data to the URL
+        $.post(action, pars, 'json')
+            .done(function (data) {
+                console.log(data);
+                // show success message
+                VinylShop.toast({
+                    type: data.type,
+                    text: data.text
+                });
+                // Hide the modal
+                $('#modal-genre').modal('hide');
+                // Rebuild the table
+                loadTable();
+            })
+            .fail(function (e) {
+                console.log('error', e);
+                // e.responseJSON.errors contains an array of all the validation errors
+                console.log('error message', e.responseJSON.errors);
+                // Loop over the e.responseJSON.errors array and create an ul list with all the error messages
+                let msg = '<ul>';
+                $.each(e.responseJSON.errors, function (key, value) {
+                    msg += `<li>${value}</li>`;
+                });
+                msg += '</ul>';
+                // show the errors
+                VinylShop.toast({
+                    type: 'error',
+                    text: msg
+                });
+            });
+        });
     });
 
-    // Delete a genre
     function deleteGenre(id) {
     // Delete the genre from the database
     let pars = {
@@ -75,11 +138,6 @@
     $.post(`/admin/genres2/${id}`, pars, 'json')
         .done(function (data) {
             console.log('data', data);
-            // Show toast
-            VinylShop.toast({
-                type: data.type,    // optional because the default type is 'success'
-                text: data.text
-            });
             // Rebuild the table
             loadTable();
         })
@@ -96,7 +154,7 @@
                     // Clear tbody tag
                     $('tbody').empty();
                     // Loop over each item in the array
-                    $.each(data, function (key, value) {
+                    $.each(data, function(key, value) {
                         let tr = `<tr>
                                <td>${value.id}</td>
                                <td>${value.name}</td>
@@ -122,6 +180,5 @@
                     console.log('error', e);
                 })
         }
-
     </script>
 @endsection

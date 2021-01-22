@@ -25,7 +25,7 @@ class Genres2Controller extends Controller
      */
     public function create()
     {
-        //
+        return redirect('admin/genres2');
     }
 
     /**
@@ -36,7 +36,17 @@ class Genres2Controller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required|min:3|unique:genres,name'
+        ]);
+
+        $genre = new Genre();
+        $genre->name = $request->name;
+        $genre->save();
+        return response()->json([
+            'type' => 'success',
+            'text' => "The genre <b>$genre->name</b> has been added"
+        ]);
     }
 
     /**
@@ -47,7 +57,7 @@ class Genres2Controller extends Controller
      */
     public function show(Genre $genre)
     {
-        //
+        return redirect('admin/genres2');
     }
 
     /**
@@ -58,7 +68,7 @@ class Genres2Controller extends Controller
      */
     public function edit(Genre $genre)
     {
-        //
+        return redirect('admin/genres2');
     }
 
     /**
@@ -70,7 +80,16 @@ class Genres2Controller extends Controller
      */
     public function update(Request $request, Genre $genre)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required|min:3|unique:genres,name,' . $genre->id
+        ]);
+
+        $genre->name = $request->name;
+        $genre->save();
+        return response()->json([
+            'type' => 'success',
+            'text' => "The genre <b>$genre->name</b> has been updated"
+        ]);
     }
 
     /**
@@ -86,7 +105,6 @@ class Genres2Controller extends Controller
             'type' => 'success',
             'text' => "The genre <b>$genre->name</b> has been deleted"
         ]);
-
     }
 
     public function qryGenres()
