@@ -8,7 +8,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\GenresController;
 use App\Http\Controllers\Admin\RecordController;
 use App\Http\Controllers\User\ProfileController;
-use App\Http\Controllers\Admin\Genres2Controller;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\User\PasswordController;
 
 /*
@@ -35,6 +35,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('genres/qryGenres', [GenresController::class, 'qryGenres']);
     Route::resource('genres', GenresController::class);
     Route::resource('records', RecordController::class);
+    Route::resource('users', UserController::class);
 });
 
 // Routs for authorized users
