@@ -79,25 +79,25 @@
         });
 
         $('#btn-create').click(function () {
-        // Update the modal
-        $('.modal-title').text(`New genre`);
-        $('form').attr('action', `/admin/genres2`);
-        $('#name').val('');
-        $('input[name="_method"]').val('post');
-        // Show the modal
-        $('#modal-genre').modal('show');
+            // Update the modal
+            $('.modal-title').text(`New genre`);
+            $('form').attr('action', `/admin/genres2`);
+            $('#name').val('');
+            $('input[name="_method"]').val('post');
+            // Show the modal
+            $('#modal-genre').modal('show');
         });
 
         $('#modal-genre form').submit(function (e) {
-        // Don't submit the form
-        e.preventDefault();
-        // Get the action property (the URL to submit)
-        let action = $(this).attr('action');
-        // Serialize the form and send it as a parameter with the post
-        let pars = $(this).serialize();
-        console.log(pars);
-        // Post the data to the URL
-        $.post(action, pars, 'json')
+            // Don't submit the form
+            e.preventDefault();
+            // Get the action property (the URL to submit)
+            let action = $(this).attr('action');
+            // Serialize the form and send it as a parameter with the post
+            let pars = $(this).serialize();
+            console.log(pars);
+            // Post the data to the URL
+            $.post(action, pars, 'json')
             .done(function (data) {
                 console.log(data);
                 // show success message
@@ -127,27 +127,36 @@
                 });
             });
         });
+
+        function deleteGenre(id) {
+        // Delete the genre from the database
+        let pars = {
+            '_token': '{{ csrf_token() }}',
+            '_method': 'delete'
+        };
+        $.post(`/admin/genres2/${id}`, pars, 'json')
+            .done(function (data) {
+                console.log('data', data);
+                // Show toast
+                new Noty({
+                    type: data.type,
+                    text: data.text,
+                    // overwrite default Noty settings
+                    layout: 'topRight',
+                    timeout: 3000,
+                    modal: false,
+                }).show();
+                // Rebuild the table
+                loadTable();
+            })
+            .fail(function (e) {
+                console.log('error', e);
+            })
+        }
     });
 
-    function deleteGenre(id) {
-    // Delete the genre from the database
-    let pars = {
-        '_token': '{{ csrf_token() }}',
-        '_method': 'delete'
-    };
-    $.post(`/admin/genres2/${id}`, pars, 'json')
-        .done(function (data) {
-            console.log('data', data);
-            // Rebuild the table
-            loadTable();
-        })
-        .fail(function (e) {
-            console.log('error', e);
-        });
-}
-
-        // Load genres with AJAX
-        function loadTable() {
+    // Load genres with AJAX
+    function loadTable() {
             $.getJSON('/admin/genres2/qryGenres')
                 .done(function (data) {
                     console.log('data', data);

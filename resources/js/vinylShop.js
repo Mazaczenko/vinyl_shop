@@ -1,8 +1,5 @@
 let VinylShop = (function () {
 
-    function hello() {
-        console.log('The Vinyl Shop JavaScript works! 🙂');
-    }
     /**
      * Show a Noty toast.
      * @param {object} obj
@@ -22,7 +19,6 @@ let VinylShop = (function () {
 
     // Return all functions that are public available. E.g. VinylShop.hello()
     return {
-        hello: hello,
         toast: toast,
     };
 })();

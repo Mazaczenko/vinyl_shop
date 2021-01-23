@@ -30,15 +30,11 @@ Route::get('shop', [ShopController::class, 'index']);
 Route::get('shop/{id}', [ShopController::class, 'show']);
 
 // New version with prefix and group
-Route::middleware(['auth', 'admin'])->prefix('admin')->group(function ()
-{
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::redirect('/', '/admin/records');
+    Route::get('genres/qryGenres', [GenresController::class, 'qryGenres']);
     Route::resource('genres', GenresController::class);
-    Route::get('genres2/qryGenres', [Genres2Controller::class, 'qryGenres']);
-    Route::resource('genres2', Genres2Controller::class)->parameters([
-        'genres2' => 'genres'
-    ]);
-    Route::get('records',[RecordController::class, 'index']);
+    Route::resource('records', RecordController::class);
 });
 
 // Routs for authorized users
