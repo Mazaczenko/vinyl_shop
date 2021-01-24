@@ -1,14 +1,16 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ItunesControlle;
+use App\Http\Controllers\BasketController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\GenresController;
 use App\Http\Controllers\Admin\RecordController;
 use App\Http\Controllers\User\ProfileController;
-use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\User\PasswordController;
 
 /*
@@ -28,6 +30,12 @@ Route::post('contact-us', [ContactUsController::class, 'sendEmail']);
 Route::get('itunes', [ItunesControlle::class, 'index']);
 Route::get('shop', [ShopController::class, 'index']);
 Route::get('shop/{id}', [ShopController::class, 'show']);
+
+// Basket views
+Route::get('basket', [BasketController::class, 'index']);
+Route::get('basket/add/{id}', [BasketController::class, 'addToCart']);
+Route::get('basket/delete/{id}', [BasketController::class, 'deleteFromCart']);
+Route::get('basket/empty', [BasketController::class, 'emptyCart']);
 
 // New version with prefix and group
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
