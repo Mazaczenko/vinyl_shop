@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Helpers\Json;
 use Illuminate\Support\Facades\Http;
 
-
-
 class ItunesControlle extends Controller
 {
     public function index() {
