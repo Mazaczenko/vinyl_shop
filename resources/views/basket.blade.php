@@ -3,45 +3,58 @@
 @section('title', 'Your Basket')
 
 @section('main')
-    <h1>Basket</h1>
+<h1>Basket</h1>
+@if( FacadeCart::getTotalQty() == 0)
+    <div class="alert alert-primary">
+        Your basket is empty.
+    </div>
+@else
+<div class="table-responsive">
     <table class="table">
         <thead>
         <tr>
-            <th>#</th>
-            <th>Artist - Album</th>
-            <th>Action</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th></th>
+            <th>Record</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
-
-        @foreach($records as $record)
+        @foreach(FacadeCart::getRecords() as $record)
             <tr>
-                <td>{{ $record->id }}</td>
-                <td>{{ $record->artist }} - {{ $record->title }}</td>
+                <td>{{ $record['qty'] }}</td>
+                <td>€&nbsp;{{ $record['price'] }}</td>
+                <td>
+                    <img class="img-thumbnail cover" src="/assets/vinyl.png"
+                         data-src="{{ $record['cover'] }}"
+                         alt="{{ $record['title'] }}">
+                </td>
+                <td>
+                    {{ $record['artist'] . ' - ' . $record['title']  }}
+                </td>
                 <td>
                     <div class="btn-group btn-group-sm">
-                        <a href="/basket/add/{{ $record->id }}" class="btn btn-outline-success">+1</a>
-                        <a href="/basket/delete/{{ $record->id }}" class="btn btn-outline-danger">-1</a>
+                        <a href="/basket/delete/{{ $record['id'] }}" class="btn btn-outline-secondary">-1</a>
+                        <a href="/basket/add/{{ $record['id'] }}" class="btn btn-outline-secondary">+1</a>
                     </div>
                 </td>
             </tr>
         @endforeach
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <p><a href="/basket/empty" class="btn btn-sm btn-outline-danger">Empty your basket</a></p>
+            </td>
+            <td>
+                <p><b>Total</b>: €&nbsp;{{ FacadeCart::getTotalPrice() }}</p>
+                <p><a href="/user/checkout" class="btn btn-sm btn-outline-success">Checkout</a></p>
+            </td>
+        </tr>
         </tbody>
     </table>
-    <a href="/basket/empty" class="btn btn-sm btn-outline-danger">Empty basket</a>
-
-    <h2 class="mt-5">What's inside my basket?</h2>
-    <hr>
-    <h4>FacadeCart::getCart():</h4>
-    <pre>{{ json_encode(FacadeCart::getCart(), JSON_PRETTY_PRINT) }}</pre>
-    <hr>
-    <h4>FacadeCart::getRecords():</h4>
-    <pre>{{ json_encode(FacadeCart::getRecords(), JSON_PRETTY_PRINT) }}</pre>
-    <hr>
-    <h4>FacadeCart::getOneRecord(6):</h4>
-    <pre>{{ json_encode(FacadeCart::getOneRecord(6), JSON_PRETTY_PRINT) }}</pre>
-    <hr>
-    <p><b>FacadeCart::getKeys()</b>: {{ json_encode(FacadeCart::getKeys()) }}</p>
-    <p><b>FacadeCart::getTotalPrice()</b>: {{ json_encode(FacadeCart::getTotalPrice()) }}</p>
-    <p><b>FacadeCart::getTotalQty()</b>: {{ json_encode(FacadeCart::getTotalQty()) }}</p>
+</div>
+@endif
 @endsection
