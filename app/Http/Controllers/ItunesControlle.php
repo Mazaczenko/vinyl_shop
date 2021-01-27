@@ -16,8 +16,9 @@ class ItunesControlle extends Controller
             ->transform(function($item, $key){
                 unset($item['id'], $item['releaseDate'], $item['collectionName'],
                     $item['kind'], $item['copyright'], $item['artistId'], $item['contentAdvisoryRating'],
-                    $item['url']);
-                    return $item;
+                    $item['url']
+                );
+                return $item;
             });
 
 

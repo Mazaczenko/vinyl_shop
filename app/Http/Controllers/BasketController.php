@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Facade\FacadeCart;
+use App\Helpers\Json;
 use App\Models\Record;
+use App\Helpers\Facade\FacadeCart;
 use App\Http\Controllers\Controller;
 
 class BasketController extends Controller
@@ -14,7 +15,7 @@ class BasketController extends Controller
     // Take the first 3 records, ordered by album title
     $records = Record::orderBy('title')->take(3)->get();
     $result = compact('records');
-    // Json::dump($result);
+    Json::dump($result);
     return view('basket', $result);
     }
 
