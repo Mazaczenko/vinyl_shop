@@ -32,16 +32,16 @@
 
     <h2 class="mt-5">What's inside my basket?</h2>
     <hr>
-    <h4>Cart::getCart():</h4>
-    <pre>{{ json_encode(Cart::getCart(), JSON_PRETTY_PRINT) }}</pre>
+    <h4>FacadeCart::getCart():</h4>
+    <pre>{{ json_encode(FacadeCart::getCart(), JSON_PRETTY_PRINT) }}</pre>
     <hr>
-    <h4>Cart::getRecords():</h4>
-    <pre>{{ json_encode(Cart::getRecords(), JSON_PRETTY_PRINT) }}</pre>
+    <h4>FacadeCart::getRecords():</h4>
+    <pre>{{ json_encode(FacadeCart::getRecords(), JSON_PRETTY_PRINT) }}</pre>
     <hr>
-    <h4>Cart::getOneRecord(6):</h4>
-    <pre>{{ json_encode(Cart::getOneRecord(6), JSON_PRETTY_PRINT) }}</pre>
+    <h4>FacadeCart::getOneRecord(6):</h4>
+    <pre>{{ json_encode(FacadeCart::getOneRecord(6), JSON_PRETTY_PRINT) }}</pre>
     <hr>
-    <p><b>Cart::getKeys()</b>: {{ json_encode(Cart::getKeys()) }}</p>
-    <p><b>Cart::getTotalPrice()</b>: {{ json_encode(Cart::getTotalPrice()) }}</p>
-    <p><b>Cart::getTotalQty()</b>: {{ json_encode(Cart::getTotalQty()) }}</p>
+    <p><b>FacadeCart::getKeys()</b>: {{ json_encode(FacadeCart::getKeys()) }}</p>
+    <p><b>FacadeCart::getTotalPrice()</b>: {{ json_encode(FacadeCart::getTotalPrice()) }}</p>
+    <p><b>FacadeCart::getTotalQty()</b>: {{ json_encode(FacadeCart::getTotalQty()) }}</p>
 @endsection

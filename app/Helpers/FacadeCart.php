@@ -3,7 +3,7 @@
 namespace App\Helpers;
 
 
-class Cart
+class FacadeCart
 {
 
     private $cart = [
