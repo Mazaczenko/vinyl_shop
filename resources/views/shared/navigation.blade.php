@@ -31,8 +31,13 @@
                 @endguest
                 <li class="nav-item">
                     <a class="nav-link" href="/basket">
-                        <span class="ml-3 badge badge-success">{{ FacadeCart::getTotalQty() }}</span>
-                        <i class="fa fa-shopping-basket"></i>Basket</a>
+                @if( FacadeCart::getTotalQty() == 0)
+                <i class="fa fa-shopping-basket"></i>Basket</a>
+                @else
+                <i class="fa fa-shopping-basket"></i>Basket<span class="ml-3 badge badge-success">{{ FacadeCart::getTotalQty() }}</span></a>
+
+                @endif
+
                 </li>
                 @auth
                 <li class="nav-item dropdown">
