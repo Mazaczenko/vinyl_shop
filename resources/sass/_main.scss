@@ -1,7 +1,15 @@
 main {
     min-height: 500px;
-  }
+}
 
-  .btn[disabled] {
+.btn[disabled] {
     cursor: not-allowed;
-  }
+}
+
+@for $i from 1 through 20 {
+
+    // .width-10, .width-20, ... .width-200,
+    .width-#{$i * 10} {
+        width: #{$i * 10}px;
+    }
+}

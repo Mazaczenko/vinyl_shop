@@ -12,27 +12,27 @@
 <div class="table-responsive">
     <table class="table">
         <thead>
-        <tr>
-            <th>Qty</th>
-            <th>Price</th>
-            <th></th>
-            <th>Record</th>
-            <th></th>
-        </tr>
-        </thead>
+            <tr>
+                <th class="width-50">Qty</th>
+                <th class="width-80">Price</th>
+                <th class="width-80"></th>
+                <th>Record</th>
+                <th class="width-120"></th>
+            </tr>
+            </thead>
         <tbody>
         @foreach(FacadeCart::getRecords() as $record)
             <tr>
-                <td>{{ $record['qty'] }}</td>
-                <td>€&nbsp;{{ $record['price'] }}</td>
-                <td>
-                    <img class="img-thumbnail cover" src="/assets/vinyl.png"
+                <th>{{ $record['qty'] }}</th>
+                <th>€&nbsp;{{ $record['price'] }}</th>
+                <th>
+                    <img class="img-thumbnail cover" src="{{ $record['cover'] }}"
                          data-src="{{ $record['cover'] }}"
                          alt="{{ $record['title'] }}">
-                </td>
-                <td>
+                </th>
+                <th>
                     {{ $record['artist'] . ' - ' . $record['title']  }}
-                </td>
+                </th>
                 <td>
                     <div class="btn-group btn-group-sm">
                         <a href="/basket/delete/{{ $record['id'] }}" class="btn btn-outline-secondary">-1</a>
@@ -42,19 +42,30 @@
             </tr>
         @endforeach
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
+            <th></th>
+            <td></th>
+            <th></th>
+            <th>
                 <p><a href="/basket/empty" class="btn btn-sm btn-outline-danger">Empty your basket</a></p>
-            </td>
-            <td>
+            </th>
+            <th>
                 <p><b>Total</b>: €&nbsp;{{ FacadeCart::getTotalPrice() }}</p>
                 <p><a href="/user/checkout" class="btn btn-sm btn-outline-success">Checkout</a></p>
-            </td>
+            </th>
         </tr>
         </tbody>
     </table>
 </div>
 @endif
+@endsection
+
+@section('script_after')
+    <script>
+        $(function () {
+            $('.cover').each(function () {
+                $(this).attr('src', $(this).data('src'));
+            });
+            $('tbody tr:not(:last-child) td').addClass('align-middle');
+        });
+    </script>
 @endsection
