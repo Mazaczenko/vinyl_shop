@@ -39,4 +39,11 @@ class BasketController extends Controller
         FacadeCart::empty();
         return redirect('basket');
     }
+
+    public function removeRecordFromCart($id)
+    {
+        $record = Record::findOrFail($id);
+        FacadeCart::removeRecord($record);
+        return back();
+    }
 }

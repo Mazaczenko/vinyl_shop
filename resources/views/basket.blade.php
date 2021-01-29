@@ -9,6 +9,11 @@
     Your basket is empty.
 </div>
 @else
+@guest()
+    <div class="alert alert-primary">
+        You must be <a href="/login"><b>logged in</b></a> to checkout
+    </div>
+@endguest
 <div class="table-responsive">
     <table class="table">
         <thead>
@@ -37,6 +42,9 @@
                     <div class="btn-group btn-group-sm">
                         <a href="/basket/delete/{{ $record['id'] }}" class="btn btn-outline-secondary">-1</a>
                         <a href="/basket/add/{{ $record['id'] }}" class="btn btn-outline-secondary">+1</a>
+                        <a href="/basket/remove/{{ $record['id'] }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
                     </div>
                 </td>
             </tr>
@@ -51,7 +59,9 @@
                 </th>
                 <th>
                     <p><b>Total</b>: €&nbsp;{{ FacadeCart::getTotalPrice() }}</p>
+                    @auth()
                     <p><a href="/user/checkout" class="btn btn-sm btn-outline-success">Checkout</a></p>
+                    @endauth
                 </th>
             </tr>
         </tbody>

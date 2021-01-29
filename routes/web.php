@@ -35,6 +35,7 @@ Route::get('shop/{id}', [ShopController::class, 'show']);
 Route::get('basket', [BasketController::class, 'index']);
 Route::get('basket/add/{id}', [BasketController::class, 'addToCart']);
 Route::get('basket/delete/{id}', [BasketController::class, 'deleteFromCart']);
+Route::get('basket/remove/{id}', [BasketController::class, 'removeRecordFromCart']);
 Route::get('basket/empty', [BasketController::class, 'emptyCart']);
 
 // New version with prefix and group

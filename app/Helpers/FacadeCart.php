@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use Illuminate\Support\Arr;
+
 
 class FacadeCart
 {
@@ -26,8 +28,10 @@ class FacadeCart
         $id = $item->id;
         $singlePrice = $item->price;
         if (!array_key_exists($id, $this->cart['records'])) {
-            if($item->cover == null){
+            if ($item->cover == null) {
                 $cover = "https://coverartarchive.org/release/$item->title_mbid/front-250.jpg";
+            }else{
+                $cover = $item->cover;
             }
             $this->cart['records'][$id] = [
                 'id' => $item->id,
@@ -63,9 +67,14 @@ class FacadeCart
     }
 
     //Remove one record from basket
-    public function removeRecord()
+    public function removeRecord($item)
     {
-
+        $id = $item->id;
+        if (array_key_exists($id, $this->cart['records'])) {
+            unset($this->cart['records'][$id]);
+            $this->updateTotal();
+        }
+        session()->put('cart', $this->cart);  // save the session
     }
 
     // Empty the cart
