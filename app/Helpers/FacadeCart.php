@@ -26,11 +26,14 @@ class FacadeCart
         $id = $item->id;
         $singlePrice = $item->price;
         if (!array_key_exists($id, $this->cart['records'])) {
+            if($item->cover == null){
+                $cover = "https://coverartarchive.org/release/$item->title_mbid/front-250.jpg";
+            }
             $this->cart['records'][$id] = [
                 'id' => $item->id,
                 'title' => $item->title,
                 'artist' => $item->artist,
-                'cover' => $item->cover,
+                'cover' => $cover,
                 'qty' => 1,
                 'price' => $item->price
             ];
@@ -57,6 +60,12 @@ class FacadeCart
             $this->updateTotal();
         }
         session()->put('cart', $this->cart);  // save the session
+    }
+
+    //Remove one record from basket
+    public function removeRecord()
+    {
+
     }
 
     // Empty the cart

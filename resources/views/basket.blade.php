@@ -5,9 +5,9 @@
 @section('main')
 <h1>Basket</h1>
 @if( FacadeCart::getTotalQty() == 0)
-    <div class="alert alert-primary">
-        Your basket is empty.
-    </div>
+<div class="alert alert-primary">
+    Your basket is empty.
+</div>
 @else
 <div class="table-responsive">
     <table class="table">
@@ -19,16 +19,16 @@
                 <th>Record</th>
                 <th class="width-120"></th>
             </tr>
-            </thead>
+        </thead>
         <tbody>
-        @foreach(FacadeCart::getRecords() as $record)
+            @foreach(FacadeCart::getRecords() as $record)
             <tr>
                 <th>{{ $record['qty'] }}</th>
                 <th>€&nbsp;{{ $record['price'] }}</th>
                 <th>
-                    <img class="img-thumbnail cover" src="{{ $record['cover'] }}"
-                         data-src="{{ $record['cover'] }}"
-                         alt="{{ $record['title'] }}">
+                    <img class="img-thumbnail cover" src="/assets/vinyl.png"
+                    data-src="{{ $record['cover'] }}"
+                    alt="{{ $record['title'] }}">
                 </th>
                 <th>
                     {{ $record['artist'] . ' - ' . $record['title']  }}
@@ -40,19 +40,20 @@
                     </div>
                 </td>
             </tr>
-        @endforeach
-        <tr>
-            <th></th>
-            <td></th>
-            <th></th>
-            <th>
-                <p><a href="/basket/empty" class="btn btn-sm btn-outline-danger">Empty your basket</a></p>
-            </th>
-            <th>
-                <p><b>Total</b>: €&nbsp;{{ FacadeCart::getTotalPrice() }}</p>
-                <p><a href="/user/checkout" class="btn btn-sm btn-outline-success">Checkout</a></p>
-            </th>
-        </tr>
+            @endforeach
+            <tr>
+                <th></th>
+                <td>
+                    </th>
+                <th></th>
+                <th>
+                    <p><a href="/basket/empty" class="btn btn-sm btn-outline-danger">Empty your basket</a></p>
+                </th>
+                <th>
+                    <p><b>Total</b>: €&nbsp;{{ FacadeCart::getTotalPrice() }}</p>
+                    <p><a href="/user/checkout" class="btn btn-sm btn-outline-success">Checkout</a></p>
+                </th>
+            </tr>
         </tbody>
     </table>
 </div>
@@ -62,10 +63,9 @@
 @section('script_after')
     <script>
         $(function () {
-            $('.cover').each(function () {
+             $('.cover').each(function () {
                 $(this).attr('src', $(this).data('src'));
             });
-            $('tbody tr:not(:last-child) td').addClass('align-middle');
         });
     </script>
 @endsection
