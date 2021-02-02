@@ -27,6 +27,7 @@ class FacadeCart
     {
         $id = $item->id;
         $singlePrice = $item->price;
+
         if (!array_key_exists($id, $this->cart['records'])) {
             if ($item->cover == null) {
                 $cover = "https://coverartarchive.org/release/$item->title_mbid/front-250.jpg";
@@ -41,12 +42,12 @@ class FacadeCart
                 'qty' => 1,
                 'price' => $item->price
             ];
-        } else {
-            $this->cart['records'][$id]['qty']++;
-            $this->cart['records'][$id]['price'] = $singlePrice * $this->cart['records'][$id]['qty'];
-        }
-        $this->updateTotal();                 // update totalQty and totalPrice
-        session()->put('cart', $this->cart);  // save the session
+            } else {
+                $this->cart['records'][$id]['qty']++;
+                $this->cart['records'][$id]['price'] = $singlePrice * $this->cart['records'][$id]['qty'];
+            }
+            $this->updateTotal();                 // update totalQty and totalPrice
+            session()->put('cart', $this->cart);  // save the session
     }
 
     // Delete a record from the cart

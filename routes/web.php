@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\GenresController;
 use App\Http\Controllers\Admin\RecordController;
+use App\Http\Controllers\User\HistoryController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\PasswordController;
 
@@ -59,4 +60,6 @@ Route::middleware(['auth'])->prefix('user')->group(function () {
     Route::post('profile', [ProfileController::class, 'update']);
     Route::get('password', [PasswordController::class, 'edit']);
     Route::post('password', [PasswordController::class, 'update']);
+    Route::get('history', [HistoryController::class, 'index']);
+    Route::get('checkout', [HistoryController::class, 'checkout']);
 });
