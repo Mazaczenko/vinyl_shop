@@ -7,6 +7,7 @@ use App\Models\Genre;
 use App\Models\Record;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use App\Helpers\Facade\FacadeCart;
 
 class ShopController extends Controller
 {
@@ -67,7 +68,7 @@ class ShopController extends Controller
         $record->recordUrl = 'https://musicbrainz.org/ws/2/release/' . $record->title_mbid . '?inc=recordings+url-rels&fmt=json';
 
         // If stock > 0: button is green, otherwise the button is red
-        $record->btnClass = $record->stock > 0 ? 'btn-outline-success' : 'btn-outline-danger';
+        $record->btnClass = ($record->stock > 0 && FacadeCart::getOneRecord($record->id)['qty']>$record->stock)? 'btn-outline-success' : 'btn-outline-danger';
 
         // You can't overwrite the attribute genre (object) with a string, so we make a new attribute
         $record->genreName = $record->genre->name;

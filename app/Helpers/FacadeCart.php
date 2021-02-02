@@ -27,11 +27,11 @@ class FacadeCart
     {
         $id = $item->id;
         $singlePrice = $item->price;
-
+        $stock = $item->stock;
         if (!array_key_exists($id, $this->cart['records'])) {
             if ($item->cover == null) {
                 $cover = "https://coverartarchive.org/release/$item->title_mbid/front-250.jpg";
-            }else{
+            } else {
                 $cover = $item->cover;
             }
             $this->cart['records'][$id] = [
@@ -39,9 +39,12 @@ class FacadeCart
                 'title' => $item->title,
                 'artist' => $item->artist,
                 'cover' => $cover,
+                'stock' => $stock,
                 'qty' => 1,
                 'price' => $item->price
             ];
+            } else if ($this->cart['records'][$id]['qty'] == $this->cart['records'][$id]['stock']) {
+                session()->flash('success', "<b> The record is out of stock </b>");
             } else {
                 $this->cart['records'][$id]['qty']++;
                 $this->cart['records'][$id]['price'] = $singlePrice * $this->cart['records'][$id]['qty'];
@@ -101,6 +104,8 @@ class FacadeCart
     {
         if (array_key_exists($key, $this->cart['records'])) {
             return $this->cart['records'][$key];
+        } else {
+            return true;
         }
     }
 
