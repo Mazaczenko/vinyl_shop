@@ -22,12 +22,16 @@ class BasketController extends Controller
     public function addToCart($id)
     {
         $record = Record::findOrFail($id);
-        FacadeCart::add($record);
-        session()->flash('success', "The record <b>$record->title</b> from <b>$record->artist</b> has been added to your basket");
+        if (FacadeCart::isInStock($record)) {
+            FacadeCart::add($record);
+            session()->flash('success', "The record <b>$record->title</b> from <b>$record->artist</b> has been added to your basket");
+        } else {
+            session()->flash('success', "You have all <b>$record->title</b> - <b>$record->artist</b> in your basket");
+        }
         return back();
     }
 
-    public function deleteFromCart($id)
+   public function deleteFromCart($id)
     {
         $record = Record::findOrFail($id);
         FacadeCart::delete($record);

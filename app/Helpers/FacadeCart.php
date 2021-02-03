@@ -44,7 +44,7 @@ class FacadeCart
                 'price' => $item->price
             ];
             } else if ($this->cart['records'][$id]['qty'] == $this->cart['records'][$id]['stock']) {
-                session()->flash('success', "<b> The record is out of stock </b>");
+                return back();
             } else {
                 $this->cart['records'][$id]['qty']++;
                 $this->cart['records'][$id]['price'] = $singlePrice * $this->cart['records'][$id]['qty'];
@@ -81,6 +81,20 @@ class FacadeCart
         session()->put('cart', $this->cart);  // save the session
     }
 
+    //Count
+    public function isInStock($item)
+    {
+        $id = $item->id;
+        if (array_key_exists($id, $this->cart['records'])) {
+            if ($this->cart['records'][$id]['qty'] < $this->cart['records'][$id]['stock']) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+            return true;
+    }
+
     // Empty the cart
     public function empty()
     {
@@ -107,12 +121,6 @@ class FacadeCart
         } else {
             return true;
         }
-    }
-
-    // Get all the record keys
-    public function getKeys()
-    {
-        return array_keys($this->cart['records']);
     }
 
     // Get the number of items
