@@ -7,6 +7,17 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## About this repository
+
+E-commerce shop built in Laravel 8 based on the best free course I found so far.
+
+You can find it here 
+
+https://itf-laravel.netlify.app/laravel_7/start.html
+
+Enjoy :)
+
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
