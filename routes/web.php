@@ -8,6 +8,7 @@ use App\Http\Controllers\BasketController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\GenresController;
 use App\Http\Controllers\Admin\RecordController;
 use App\Http\Controllers\User\HistoryController;
@@ -43,9 +44,16 @@ Route::get('basket/empty', [BasketController::class, 'emptyCart']);
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::redirect('/', '/admin/records');
     Route::get('genres/qryGenres', [GenresController::class, 'qryGenres']);
+    Route::get('orders', [OrderController::class, 'index']);
     Route::resource('genres', GenresController::class);
     Route::resource('records', RecordController::class);
     Route::resource('users', UserController::class);
+
+        // yes, you can nest prefixes and groups if you want :-)
+    Route::prefix('demo')->group(function (){
+        Route::get('orderlines', [OrderController::class, 'orderlines']);
+        Route::get('users', [OrderController::class, 'users']);
+    });
 });
 
 // Routs for authorized users

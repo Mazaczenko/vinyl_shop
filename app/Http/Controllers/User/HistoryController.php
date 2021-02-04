@@ -33,7 +33,7 @@ class HistoryController extends Controller
         $order = new Order();
         $order->user_id = auth()->id();
         $order->total_price = FacadeCart::getTotalPrice();
-        //$order->save();
+        $order->save();
         // Retrieve the id of the last inserted order
         $order_id = $order->id;
         // Loop over the records array in the cart and save them to the orderlines table
@@ -45,10 +45,10 @@ class HistoryController extends Controller
             $orderline->cover = $record['cover'];
             $orderline->total_price = $record['price'];
             $orderline->quantity = $record['qty'];
-            // $orderline->save();
+            $orderline->save();
         }
         // Empty the cart
-        //FacadeCart::empty();
+        FacadeCart::empty();
         // Redirect to the history page
         $message = 'Thank you for your order.<br>The records will be delivered as soon as possible.';
 
