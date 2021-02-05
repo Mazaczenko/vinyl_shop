@@ -1,19 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ShopController;
-use App\Http\Controllers\ItunesControlle;
-use App\Http\Controllers\BasketController;
-use App\Http\Controllers\ContactUsController;
-use App\Http\Controllers\Admin\UserController;
+use Illuminate\Support\Facades\{Auth, Route};
+use App\Http\Controllers\{ShopController, ItunesControlle, BasketController, ContactUsController};
+use App\Http\Controllers\Admin\{UserController, OrderController, GenresController, RecordController};
+use App\Http\Controllers\User\{HistoryController, ProfileController, PasswordController};
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\GenresController;
-use App\Http\Controllers\Admin\RecordController;
-use App\Http\Controllers\User\HistoryController;
-use App\Http\Controllers\User\ProfileController;
-use App\Http\Controllers\User\PasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +33,7 @@ Route::get('basket/empty', [BasketController::class, 'emptyCart']);
 
 // New version with prefix and group
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+
     Route::redirect('/', '/admin/records');
     Route::get('genres/qryGenres', [GenresController::class, 'qryGenres']);
     Route::get('orders', [OrderController::class, 'index']);
@@ -49,7 +41,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::resource('records', RecordController::class);
     Route::resource('users', UserController::class);
 
-        // yes, you can nest prefixes and groups if you want :-)
+    // yes, you can nest prefixes and groups if you want :-)
     Route::prefix('demo')->group(function (){
         Route::get('orderlines', [OrderController::class, 'orderlines']);
         Route::get('users', [OrderController::class, 'users']);

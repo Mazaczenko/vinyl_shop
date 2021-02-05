@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use App\Helpers\Json;
 use App\Mail\OrderMail;
 use Illuminate\Http\Request;
 use App\Helpers\Facade\FacadeCart;
-use App\Models\{Order, Orderline};
+use App\Models\{User, Order, Orderline};
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 
