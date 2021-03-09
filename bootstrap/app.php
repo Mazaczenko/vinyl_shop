@@ -15,6 +15,11 @@ $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
 
+// fix path for Artisan scripts
+$app->bind('path.public', function() {
+    return base_path().'/public_html';
+});
+
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces

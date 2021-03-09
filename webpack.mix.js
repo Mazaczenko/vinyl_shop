@@ -11,11 +11,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js/app.js')
-    .sass('resources/sass/app.scss', 'public/css/app.css')
-
-    .js('resources/js/custom.js', 'public/js/custom.js')
-    .sass('resources/sass/custom.scss', 'public/css/custom.css')
+mix.js('resources/js/app.js', 'js')
+    .sass('resources/sass/app.scss', 'css')
 
     .sourceMaps(true, 'source-map')
     .options({
