@@ -17,7 +17,7 @@ let VinylShop = (function () {
         }).show();
     }
 
-    // Return all functions that are public available. E.g. VinylShop.hello()
+    // Return all functions that are public available. E.g. VinylShop.toast()
     return {
         toast: toast,
     };
