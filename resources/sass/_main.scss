@@ -6,6 +6,10 @@ main {
     cursor: not-allowed;
 }
 
+.card {
+    cursor: pointer;
+}
+
 @for $i from 1 through 20 {
 
     // .width-10, .width-20, ... .width-200,
